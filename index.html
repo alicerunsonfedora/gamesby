@@ -1,47 +1,57 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Games By Marquis Kurt</title>
-        <link rel="stylesheet" href="tailwind.min.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body class="flex flex-col">
-        <div class="p-12 bg-gray-800 text-white text-center items-center">
-            <h1 class="text-xl text-gray-100 font-semibold">Games by</h1>
-            <img src="./images/logomark.svg" alt="Marquis Kurt" class="h-48 mx-auto" />
-        </div>
-        <div class="flex-grow p-16 bg-gray-100">
-            <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-white p-4 rounded-lg shadow-md flex flex-col">
-                    <img src="./images/unscripted.png" alt="Unscripted image" class="rounded-lg">
-                    <p class="mt-2 text-2xl font-bold">Unscripted</p>
-                    <p class="text-md text-gray-700 p-1 flex-grow">A visual novel about software development.</p>
-                    <a href="https://unscriptedvn.dev" class="mt-2 bg-blue-500 hover:bg-blue-300 text-white text-sm uppercase font-semibold rounded-md p-3 text-center">
-                        Learn more
-                    </a>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md flex flex-col">
-                    <img src="./images/termina.png" alt="Termina image" class="rounded-lg">
-                    <p class="mt-2 text-2xl font-bold">Termina</p>
-                    <p class="text-md text-gray-700 p-1 flex-grow">A Swifty single-user dungeon for the Mac.</p>
-                    <a href="https://terminagame.github.io" class="mt-2 bg-blue-500 hover:bg-blue-300 text-white text-sm uppercase font-semibold rounded-md p-3 text-center">
-                        Learn more
-                    </a>
-                </div>
+---
+layout: default
+---
 
-                <div class="bg-white p-4 rounded-lg shadow-md flex flex-col">
-                    <img src="./images/costumemaster.png" alt="The Costumemaster image" class="rounded-lg">
-                    <p class="mt-2 text-2xl font-bold">The Costumemaster</p>
-                    <p class="text-md text-gray-700 p-1 flex-grow">A puzzle game about switching costumes for the Mac.</p>
-                    <a href="https://costumemaster.marquiskurt.net" class="mt-2 bg-blue-500 hover:bg-blue-300 text-white text-sm uppercase font-semibold rounded-md p-3 text-center">
-                        Learn more
-                    </a>
-                </div>
-            </div>
+{% assign featured_game = site.data.games[site.featured_id] %}
+<div class="p-strip p-strip--suru">
+    <div class="row">
+        <div class="col-7">
+            <h1>{{ featured_game.name }} <span class="p-label--validated">Featured</span></h1>
+            <p>{{ featured_game.blurb }}</p>
+            <p>
+                <a href="{{ featured_game.link }}" class="p-button--positive">Learn more</a>
+            </p>
         </div>
-        <footer class="bg-gray-200 text-gray-900 p-6">
-            <p class="text-sm">&copy; 2020 Marquis Kurt. All rights reserved. | <a href="https://twitter.com/GBMarquisKurt" class="text-blue-500 hover:text-blue-300">Twitter</a></p>
-            <p class="text-gray-700"><small>Made with pure HTML5 and <a href="https://tailwindcss.com" class="text-blue-500 hover:text-blue-300">Tailwind</a>.</small></p>
-        </footer>
-    </body>
-</html>
+        <div class="col-5">
+            <img src="/assets/images/{{ featured_game.image_name }}.png" alt="">
+        </div>
+    </div>
+</div>
+<div class="p-strip is-shallow">
+    <div class="row">
+        <h2> All games </h2>
+    </div>
+</div>
+
+{% for game_obj in site.data.games %}
+{% assign game = game_obj[1] %}
+<div class="p-strip" id="p-strip--{{ game.name | downcase | strip | replace: ' ', '-' }}">
+    <div class="row">
+        <div class="col-6">
+            <h3>{{ game.name }}</h3>
+
+            <p>
+                <span class="p-label--validated">{{ game.status }}</span>
+                {% for platform in game.platforms %}
+
+                <span class="p-chip">
+                    <span class="p-chip__value">{{ platform }}</span>
+                </span>
+
+                {% endfor %}
+            </p>
+            <p>
+
+                {{ game.description }}
+            </p>
+            <p>
+                <a class="p-button--brand" href="{{ game.link }}">Get</a>
+                <!-- <a class="p-button" href="/game/{{ game.id }}">Learn more</a> -->
+            </p>
+        </div>
+        <div class="col-6">
+            <img src="/assets/images/{{ game.image_name }}.png" alt="{{ game.name }}">
+        </div>
+    </div>
+</div>
+{% endfor %}

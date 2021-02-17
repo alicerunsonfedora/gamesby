@@ -1,0 +1,28 @@
+costumemaster:
+  name: The Costumemaster
+  description: A puzzle game about switching costumes
+  status: Released
+  platforms: ["macOS"]
+  license: "MPL-2.0"
+  link: "https://costumemaster.marquiskurt.net"
+  image_name: costumemaster
+termina_dungeon:
+  name: Termina
+  id: termina_dungeon
+  description: A Swifty single-user dungeon
+  status: Released
+  platforms: ["macOS"]
+  license: "Apache-2.0"
+  link: "https://terminagame.github.io"
+  image_name: termina
+unscripted:
+  name: Unscripted
+  id: unscripted
+  description: A visual novel about software development
+  blurb: |
+    Take on your developer dream in Catalina City in Unscripted! Follow the journey of a software developer aspiring to publish their video game into the PackStore's prestigious arcade while starting a new life in Catalina City, the city for software developers.
+  status: Released
+  platforms: ["macOS", "Windows", "Linux"]
+  license: "MPL-2.0 and Proprietary"
+  link: "https://unscriptedvn.dev"
+  image_name: unscripted
